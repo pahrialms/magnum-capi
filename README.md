@@ -100,7 +100,7 @@ The only parameter for the cluster-delete command is the ID or name of the clust
 
 # 8. Monitoring stack cluster
 
-Monitoring use ceilometer,aodh,gnocchi (optional use grafana with datasource gnocchi)
+Monitoring or reading cpu, ram and other metrics is still the same as a normal vm, using ceilometer, aodh, gnocchi (optionally using graphana with gnocchi datasource)
 
 We can list the metrics in our project using the command:
 ```
