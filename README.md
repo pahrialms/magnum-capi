@@ -2,8 +2,8 @@
 
 Reference : https://docs.openstack.org/magnum/latest/user/index.html
 
-1. [Create prebuild image for k8s cluster](https://github.com/pahrialms/magnum-capi/edit/main/README.md#create-prebuild-image-for-k8s-cluster)
-2. [Create template magnum for k8s](#create-template-magnum-for-k8s)
+1. [Create prebuild image for k8s cluster](https://github.com/pahrialms/magnum-capi/tree/main?tab=readme-ov-file#1-create-prebuild-image-for-k8s-cluster)
+2. [Create template magnum for k8s](#2-create-template-magnum-for-k8s)
 3. [Create k8s cluster](#create-cluster-with-autoscalling-turn-on-default-no)
 4. [Create cluster with autoscalling turn on (default no)](#create-cluster-with-autoscalling-turn-on-default-no)
 5. [Update cluster ](#update-cluster)
