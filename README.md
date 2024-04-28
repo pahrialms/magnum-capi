@@ -9,6 +9,8 @@
 6. [Manual Scale Cluster](#manual-scale-cluster)
 7. [Delete cluster](#delete-cluster)
 8. [Monitoring stack](#monitoring-stack)
+9. [Upgrade cluster](#upgrade-cluster)
+10. [Monitoring container](#monitoring-container)
 
 
 # 1. Create prebuild image for k8s cluster
@@ -121,8 +123,14 @@ To view the resource which has a metric linked to it, we can use the command:
 ```
 openstack metric resource show <resource-id>
 ```
+# 9. Upgrade cluster
 
-# 9. Monitoring container
+In order to upgrade a cluster, you must have a cluster template pointing at the image for the new Kubernetes version and the kube_tag label must be updated to point at the new Kubernetes version.
+```
+openstack coe cluster upgrade <cluster-name> <cluster-template-name>
+```
+
+# 10. Monitoring container
 
 We can add additional container monitoring with helm and also we can install kubernetes dashboard
 
