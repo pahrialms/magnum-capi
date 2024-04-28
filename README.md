@@ -94,7 +94,7 @@ openstack coe cluster delete mycluster
 ```
 The only parameter for the cluster-delete command is the ID or name of the cluster to delete. Multiple clusters can be specified, separated by a blank space.
 
-# 8. Monitoring stack 
+# 8. Monitoring stack cluster
 
 Monitoring use ceilometer,aodh,gnocchi (optional use grafana with datasource gnocchi)
 
@@ -121,5 +121,9 @@ To view the resource which has a metric linked to it, we can use the command:
 ```
 openstack metric resource show <resource-id>
 ```
+
+# 9. Monitoring container
+
+We can add additional container monitoring with helm and also we can install kubernetes dashboard
 
 
