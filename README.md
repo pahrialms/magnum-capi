@@ -11,7 +11,7 @@
 8. [Monitoring stack](#monitoring-stack)
 
 
-# Create prebuild image for k8s cluster
+# 1. Create prebuild image for k8s cluster
 
 Today latest version of k8s supported is 1.27.x, for 1.28x, 1.29.x and 1.30.x, stil in develope
 
@@ -80,21 +80,21 @@ This is the second parameter, specifying the desired change to be made to the cl
 This is the third parameter, specifying the targeted attributes in the cluster as a list separated by blank space. To add or replace an attribute, you need to specify the value for the attribute. To remove an attribute, you only need to specify the name of the attribute. Currently the only attribute that can be replaced or removed is ‘node_count’. The attributes ‘name’, ‘master_count’ and ‘discovery_url’ cannot be replaced or delete. The table below summarizes the possible change to a cluster.  
 ![image](https://github.com/pahrialms/magnum-capi/assets/82088448/3b22996e-dbad-4124-9a76-ea43bae951a8)
 
-# Manual scale cluster
+# 6. Manual scale cluster
 Scaling a cluster means adding servers to or removing servers from the cluster. Currently, this is done through the ‘cluster-update’ operation by modifying the node-count attribute, for example:
 
 ```
 openstack coe cluster update mycluster replace node_count=8
 ```
 
-# Delete cluster
+# 7. Delete cluster
 The ‘cluster-delete’ operation removes the cluster by deleting all resources such as servers, network, storage; for example:
 ```
 openstack coe cluster delete mycluster
 ```
 The only parameter for the cluster-delete command is the ID or name of the cluster to delete. Multiple clusters can be specified, separated by a blank space.
 
-# Monitoring stack 
+# 8. Monitoring stack 
 
 Monitoring use ceilometer,aodh,gnocchi (optional use grafana with datasource gnocchi)
 
