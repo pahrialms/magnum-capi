@@ -16,7 +16,7 @@ Reference : https://docs.openstack.org/magnum/latest/user/index.html
 
 # 1. Create prebuild image for k8s cluster
 
-Today latest version of k8s supported is 1.27.x, for 1.28x, 1.29.x and 1.30.x, stil in develope
+Today latest version of k8s supported is 1.27.x, for 1.28x, 1.29.x and 1.30.x, stil on developing
 
 ```
 openstack image create ubuntu-2204-kube-v1.27.8 \
