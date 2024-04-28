@@ -6,7 +6,9 @@
 3. [Create k8s cluster](#create-cluster-with-autoscalling-turn-on-default-no)
 4. [Create cluster with autoscalling turn on (default no)](#create-cluster-with-autoscalling-turn-on-default-no)
 5. [Update cluster ](#update-cluster)
-6. [Manual Scale Cluster]()
+6. [Manual Scale Cluster](#manual-scale-cluster)
+7. [Delete cluster](#delete-cluster)
+8. [Monitoring stack](#monitoring-stack)
 
 
 # Create prebuild image for k8s cluster
