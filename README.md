@@ -1,5 +1,6 @@
 # magnum-capi
 
+- [Create prebuild image for k8s cluster](#create-prebuild-image-for-k8s-cluster)
 # Create prebuild image for k8s cluster
 Today latest version of k8s supported is 1.27.x, for 1.28x, 1.29.x and 1.30.x, stil in develope
 
