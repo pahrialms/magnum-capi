@@ -27,14 +27,14 @@ openstack coe cluster template create \
       --docker-storage-driver overlay2 \
       --coe kubernetes \
       --label kube_tag=v1.27.8 \
-      k8s-v1.27.8
+      template-k8s-v1.27.8
 ```
 
 # Create k8s cluster
 When creating the cluster we can changed default options from template, like internal network, subnet , flavor etc. 
 
 ```
-openstack coe cluster create k8s-v1.27.8 --keypair sysadmin-key \
+openstack coe cluster create mycluster --keypair sysadmin-key \
   --cluster-template k8s-v1.27.8  --fixed-subnet internal-subnet \
   --master-count 1 --node-count 1
 ```
@@ -42,12 +42,49 @@ openstack coe cluster create k8s-v1.27.8 --keypair sysadmin-key \
 # Create cluster with autoscalling turn on (default no)
 [How autoscalling work ?](https://github.com/pahrialms/magnum-capi/blob/main/autoscalling/autoscalling_flow.md)
 ```
-openstack coe cluster create k8s-v1.27.8 --keypair sysadmin-key \
+openstack coe cluster create mycluster --keypair sysadmin-key \
   --cluster-template k8s-v1.27.8 \
   --master-count 1 --node-count 1 --fixed-subnet internal-subnet \
   --labels auto_scaling_enabled=true,min_node_count=1,max_node_count=3 
 ```
 
+# Update cluster 
+A cluster can be modified using the ‘cluster-update’ command, for example:
+```
+openstack coe cluster update mycluster replace node_count=8
+```
+The parameters are positional and their definition and usage are as follows.
+
+`<cluster>`
+  
+This is the first parameter, specifying the UUID or name of the cluster to update.
+
+`<op>`
+  
+This is the second parameter, specifying the desired change to be made to the cluster attributes. The allowed changes are ‘add’, ‘replace’ and ‘remove’.
+
+`<attribute=value>`
+
+This is the third parameter, specifying the targeted attributes in the cluster as a list separated by blank space. To add or replace an attribute, you need to specify the value for the attribute. To remove an attribute, you only need to specify the name of the attribute. Currently the only attribute that can be replaced or removed is ‘node_count’. The attributes ‘name’, ‘master_count’ and ‘discovery_url’ cannot be replaced or delete. The table below summarizes the possible change to a cluster.  
+![image](https://github.com/pahrialms/magnum-capi/assets/82088448/3b22996e-dbad-4124-9a76-ea43bae951a8)
+
+# Manual Scale
+Scaling a cluster means adding servers to or removing servers from the cluster. Currently, this is done through the ‘cluster-update’ operation by modifying the node-count attribute, for example:
+
+```
+openstack coe cluster update mycluster replace node_count=8
+```
+
+# Delete
+The ‘cluster-delete’ operation removes the cluster by deleting all resources such as servers, network, storage; for example:
+```
+openstack coe cluster delete mycluster
+```
+The only parameter for the cluster-delete command is the ID or name of the cluster to delete. Multiple clusters can be specified, separated by a blank space.
+
+# Monitoring stack
+
+For monitoring 
 
 
 
