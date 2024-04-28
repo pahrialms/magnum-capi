@@ -40,13 +40,14 @@ openstack coe cluster create k8s-v1.27.8 --keypair sysadmin-key \
 ```
 
 # Create cluster with autoscalling turn on (default no)
-
+[How autoscalling work ?](https://github.com/pahrialms/magnum-capi/blob/main/autoscalling/autoscalling_flow.md)
 ```
 openstack coe cluster create k8s-v1.27.8 --keypair sysadmin-key \
   --cluster-template k8s-v1.27.8 \
-  --master-count 1 --node-count 1 \
+  --master-count 1 --node-count 1 --fixed-subnet internal-subnet \
   --labels auto_scaling_enabled=true,min_node_count=1,max_node_count=3 
 ```
+
 
 
 
