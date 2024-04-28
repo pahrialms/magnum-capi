@@ -2,16 +2,16 @@
 
 Reference : https://docs.openstack.org/magnum/latest/user/index.html
 
-1. [Create prebuild image for k8s cluster](https://github.com/pahrialms/magnum-capi/tree/main?tab=readme-ov-file#1-create-prebuild-image-for-k8s-cluster)
+1. [Create prebuild image for k8s cluster](#1-create-prebuild-image-for-k8s-cluster)
 2. [Create template magnum for k8s](#2-create-template-magnum-for-k8s)
-3. [Create k8s cluster](#create-cluster-with-autoscalling-turn-on-default-no)
-4. [Create cluster with autoscalling turn on (default no)](#create-cluster-with-autoscalling-turn-on-default-no)
-5. [Update cluster ](#update-cluster)
-6. [Manual Scale Cluster](#manual-scale-cluster)
-7. [Delete cluster](#delete-cluster)
-8. [Monitoring stack](#monitoring-stack)
-9. [Upgrade cluster](#upgrade-cluster)
-10. [Monitoring container](#monitoring-container)
+3. [Create k8s cluster](#3-create-cluster-with-autoscalling-turn-on-default-no)
+4. [Create cluster with autoscalling turn on (default no)](#4-create-cluster-with-autoscalling-turn-on-default-no)
+5. [Update cluster ](#5-update-cluster)
+6. [Manual Scale Cluster](#6-manual-scale-cluster)
+7. [Delete cluster](#7-delete-cluster)
+8. [Monitoring stack](#8-monitoring-stack)
+9. [Upgrade cluster](#9-upgrade-cluster)
+10. [Monitoring container](#10-monitoring-container)
 
 
 # 1. Create prebuild image for k8s cluster
