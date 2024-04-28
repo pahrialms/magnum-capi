@@ -1,12 +1,5 @@
 # magnum-capi
 
-1. [Create prebuild image for k8s cluster](#create-prebuild-image-for-k8s-cluster)
-2. [Create template magnum for k8s](#create-template-magnum-for-k8s)
-3. [Create k8s cluster](#create-cluster-with-autoscalling-turn-on-default-no)
-4. [Create cluster with autoscalling turn on (default no)](#create-cluster-with-autoscalling-turn-on-default-no)
-5. [Update cluster ](#update-cluster)
-6. [Manual Scale Cluster]()
-# 1. Create prebuild image for k8s cluster
 Today latest version of k8s supported is 1.27.x, for 1.28x, 1.29.x and 1.30.x, stil in develope
 
 ```
