@@ -9,7 +9,7 @@ Reference : https://docs.openstack.org/magnum/latest/user/index.html
 5. [Update cluster ](#5-update-cluster)
 6. [Manual Scale Cluster](#6-manual-scale-cluster)
 7. [Delete cluster](#7-delete-cluster)
-8. [Monitoring stack](#8-monitoring-stack)
+8. [Monitoring stack](#8-monitoring-stack-cluster)
 9. [Upgrade cluster](#9-upgrade-cluster)
 10. [Monitoring container](#10-monitoring-container)
 
