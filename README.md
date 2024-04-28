@@ -81,6 +81,7 @@ This is the second parameter, specifying the desired change to be made to the cl
 `<attribute=value>`
 
 This is the third parameter, specifying the targeted attributes in the cluster as a list separated by blank space. To add or replace an attribute, you need to specify the value for the attribute. To remove an attribute, you only need to specify the name of the attribute. Currently the only attribute that can be replaced or removed is ‘node_count’. The attributes ‘name’, ‘master_count’ and ‘discovery_url’ cannot be replaced or delete. The table below summarizes the possible change to a cluster.  
+
 ![image](https://github.com/pahrialms/magnum-capi/assets/82088448/3b22996e-dbad-4124-9a76-ea43bae951a8)
 
 # 6. Manual scale cluster
