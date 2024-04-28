@@ -1,4 +1,4 @@
-# magnum-capi
+# Table of Content magnum-cluster-api
 
 
 1. [Create prebuild image for k8s cluster](#create-prebuild-image-for-k8s-cluster)
