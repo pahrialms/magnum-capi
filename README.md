@@ -84,9 +84,30 @@ The only parameter for the cluster-delete command is the ID or name of the clust
 
 # Monitoring stack
 
-For monitoring 
+Monitoring use ceilometer,aodh,gnocchi (optional use grafana with datasource gnocchi)
 
+We can list the metrics in our project using the command:
+```
+openstack metric list
+```
 
+To view more information about the metric, we can use:
+```
+openstack metric show <uuid>
+```
 
+We can view the metric resource list as well. The following command will return a table containing every single resource (instance, instance disk, etc) which metrics are attached to.
+```
+openstack metric resource show <resource-id>
+```
+
+To view the measurements of a metric, we can use the command:
+```
+openstack metric measures show <metric-id>
+```
+To view the resource which has a metric linked to it, we can use the command:
+```
+openstack metric resource show <resource-id>
+```
 
 
