@@ -43,7 +43,7 @@ openstack coe cluster template create \
 ```
 
 # 3. Create k8s cluster
-When creating the cluster we can changed default options from template, like internal network, subnet , flavor etc. 
+When creating the cluster we can changed default options from template, like internal network, subnet , flavor etc. Full command `openstack coe cluster --help`. 
 
 ```
 openstack coe cluster create mycluster --keypair sysadmin-key \
