@@ -59,7 +59,7 @@ openstack coe cluster create mycluster --keypair sysadmin-key \
 ```
 openstack coe cluster create mycluster --keypair sysadmin-key \
   --cluster-template k8s-v1.27.8 \
-  --master-count 1 --node-count 1 --fixed-subnet internal-subnet \
+  --master-count 1 --node-count 1 --fixed-subnet internal-subnet --fixed-network internal-net \
   --labels auto_scaling_enabled=true,min_node_count=1,max_node_count=3 
 ```
 
