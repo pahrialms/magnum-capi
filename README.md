@@ -50,7 +50,7 @@ When creating the cluster we can changed default options from template, like int
 
 ```
 openstack coe cluster create mycluster --keypair sysadmin-key \
-  --cluster-template k8s-v1.27.8  --fixed-subnet internal-subnet --fixed-network internal-net \
+  --cluster-template k8s-v1.27.8  --merge-labels --fixed-subnet internal-subnet --fixed-network internal-net \
   --master-count 1 --node-count 1
 ```
 
