@@ -19,12 +19,12 @@ Reference : https://docs.openstack.org/magnum/latest/user/index.html
 Today latest version of k8s supported is 1.27.x, for 1.28x, 1.29.x and 1.30.x, stil on developing
 
 ```
-openstack image create ubuntu-2204-kube-v1.27.8 \
+openstack image create ubuntu-2204-kube-v1.26.11 \
   --public \
   --disk-format=qcow2 \
   --container-format=bare \
   --property os_distro='ubuntu' \
-  --file ubuntu-2204-kube-v1.27.8.qcow2
+  --file ubuntu-2204-kube-v1.26.11.qcow2
 ```
 
 # 2. Create template magnum for k8s
@@ -32,7 +32,7 @@ The template represent spesific version of k8s, some options that we can include
 
 ```
 openstack coe cluster template create \
-      --image ubuntu-2204-kube-v1.27.8 \
+      --image ubuntu-2204-kube-v1.26.11 \
       --external-network public\
       --dns-nameserver 8.8.8.8 \
       --master-lb-enabled \
@@ -41,8 +41,8 @@ openstack coe cluster template create \
       --network-driver calico \
       --docker-storage-driver overlay2 \
       --coe kubernetes \
-      --label kube_tag=v1.27.8 \
-      template-k8s-v1.27.8
+      --label kube_tag=v1.26.11 \
+      template-k8s-v1.26.11
 ```
 
 # 3. Create k8s cluster
@@ -50,16 +50,17 @@ When creating the cluster we can changed default options from template, like int
 
 ```
 openstack coe cluster create mycluster --keypair sysadmin-key \
-  --cluster-template k8s-v1.27.8  --merge-labels --fixed-subnet internal-subnet --fixed-network internal-net \
+  --cluster-template k8s-v1.26.11  --merge-labels --fixed-subnet internal-subnet --fixed-network internal-net \
   --master-count 1 --node-count 1
 ```
 
 # 4. Create cluster with autoscalling turn on (default no)
+To turn on autoscaling magnum, we can add label `auto_scaling_enabled` with `true` value, and to limit the minimum and maximum worker node when the autoscaling is run, we can use these labels `min_node_count=x` and `max_node_count=x` default value 1 for minimal and 2 for maximal.
 [How autoscalling work ?](https://github.com/pahrialms/magnum-capi/blob/main/autoscalling/autoscalling_flow.md)
 ```
 openstack coe cluster create mycluster --keypair sysadmin-key \
-  --cluster-template k8s-v1.27.8 \
-  --master-count 1 --node-count 1 --fixed-subnet internal-subnet --fixed-network internal-net \
+  --cluster-template k8s-v1.26.11 \
+  --master-count 1 --node-count 1 --merge-labels \
   --labels auto_scaling_enabled=true,min_node_count=1,max_node_count=3 
 ```
 
@@ -127,9 +128,9 @@ openstack metric resource show <resource-id>
 ```
 # 9. Upgrade cluster
 
-In order to upgrade a cluster, you must have a cluster template pointing at the image for the new Kubernetes version and the kube_tag label must be updated to point at the new Kubernetes version.
+In order to upgrade a cluster, you must have a cluster template pointing at the image for the new Kubernetes version and the kube_tag label must be updated to point at the new Kubernetes version. We can't skip major versions when upgrading, it must be per version, so if the k8s version is 1.25.x, it cannot be directly upgraded to 1.27.x, it must go to 1.26.x first and then to 1.27.x.
 ```
-openstack coe cluster upgrade <cluster-name> <cluster-template-name>
+openstack coe cluster upgrade mycluster k8s-v1.27.8
 ```
 
 # 10. Monitoring container
