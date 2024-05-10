@@ -1,6 +1,8 @@
 # Table of Content magnum-cluster-api
 
-Reference : https://docs.openstack.org/magnum/latest/user/index.html
+References : 
+- https://vexxhost.github.io/magnum-cluster-api/
+- https://docs.openstack.org/magnum/latest/user/index.html
 
 1. [Create prebuild image for k8s cluster](#1-create-prebuild-image-for-k8s-cluster)
 2. [Create template magnum for k8s](#2-create-template-magnum-for-k8s)
