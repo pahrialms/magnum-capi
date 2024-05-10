@@ -6,12 +6,11 @@ Reference : https://docs.openstack.org/magnum/latest/user/index.html
 2. [Create template magnum for k8s](#2-create-template-magnum-for-k8s)
 3. [Create k8s cluster](#3-create-cluster-with-autoscalling-turn-on-default-no)
 4. [Create cluster with autoscalling turn on (default no)](#4-create-cluster-with-autoscalling-turn-on-default-no)
-5. [Update cluster ](#5-update-cluster)
-6. [Manual Scale Cluster](#6-manual-scale-cluster)
-7. [Delete cluster](#7-delete-cluster)
-8. [Monitoring stack](#8-monitoring-stack-cluster)
-9. [Upgrade cluster](#9-upgrade-cluster)
-10. [Monitoring container](#10-monitoring-container)
+5. [Manual Scale Cluster](#5-manual-scale-cluster)
+6. [Delete cluster](#6-delete-cluster)
+7. [Monitoring stack](#7-monitoring-stack-cluster)
+8. [Upgrade cluster](#8-upgrade-cluster)
+9. [Monitoring container](#9-monitoring-container)
 
 
 # 1. Create prebuild image for k8s cluster
@@ -64,42 +63,21 @@ openstack coe cluster create mycluster --keypair sysadmin-key \
   --labels auto_scaling_enabled=true,min_node_count=1,max_node_count=3 
 ```
 
-# 5. Update cluster 
-A cluster can be modified using the ‘cluster-update’ command, for example:
-```
-openstack coe cluster update mycluster replace node_count=8
-```
-The parameters are positional and their definition and usage are as follows.
-
-`<cluster>`
-  
-This is the first parameter, specifying the UUID or name of the cluster to update.
-
-`<op>`
-  
-This is the second parameter, specifying the desired change to be made to the cluster attributes. The allowed changes are ‘add’, ‘replace’ and ‘remove’.
-
-`<attribute=value>`
-
-This is the third parameter, specifying the targeted attributes in the cluster as a list separated by blank space. To add or replace an attribute, you need to specify the value for the attribute. To remove an attribute, you only need to specify the name of the attribute. Currently the only attribute that can be replaced or removed is ‘node_count’. The attributes ‘name’, ‘master_count’ and ‘discovery_url’ cannot be replaced or delete. The table below summarizes the possible change to a cluster.  
-
-![image](https://github.com/pahrialms/magnum-capi/assets/82088448/3b22996e-dbad-4124-9a76-ea43bae951a8)
-
-# 6. Manual scale cluster
+# 5. Manual scale cluster
 Scaling a cluster means adding servers to or removing servers from the cluster. Currently, this is done through the ‘cluster-update’ operation by modifying the node-count attribute, for example:
 
 ```
-openstack coe cluster update mycluster replace node_count=8
+openstack coe nodegroup create mycluster test-ng --node-count 1 --role test
 ```
 
-# 7. Delete cluster
+# 6. Delete cluster
 The ‘cluster-delete’ operation removes the cluster by deleting all resources such as servers, network, storage; for example:
 ```
 openstack coe cluster delete mycluster
 ```
 The only parameter for the cluster-delete command is the ID or name of the cluster to delete. Multiple clusters can be specified, separated by a blank space.
 
-# 8. Monitoring stack cluster
+# 7. Monitoring stack cluster
 
 Monitoring or reading cpu, ram and other metrics is still the same as a normal vm, using ceilometer, aodh, gnocchi (optionally using graphana with gnocchi datasource)
 
@@ -126,14 +104,14 @@ To view the resource which has a metric linked to it, we can use the command:
 ```
 openstack metric resource show <resource-id>
 ```
-# 9. Upgrade cluster
+# 8. Upgrade cluster
 
 In order to upgrade a cluster, you must have a cluster template pointing at the image for the new Kubernetes version and the kube_tag label must be updated to point at the new Kubernetes version. We can't skip major versions when upgrading, it must be per version, so if the k8s version is 1.25.x, it cannot be directly upgraded to 1.27.x, it must go to 1.26.x first and then to 1.27.x.
 ```
 openstack coe cluster upgrade mycluster k8s-v1.27.8
 ```
 
-# 10. Monitoring container
+# 9. Monitoring container
 
 We can add additional container monitoring with helm and also we can install kubernetes dashboard
 
