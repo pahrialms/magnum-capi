@@ -64,7 +64,7 @@ openstack coe cluster create mycluster --keypair sysadmin-key \
 ```
 
 # 5. Manual scale cluster
-Scaling a cluster means adding servers to or removing servers from the cluster. Currently, this is done through the ‘cluster-update’ operation by modifying the node-count attribute, for example:
+Scaling a cluster means adding servers to or removing servers from the cluster. for example:
 
 ```
 openstack coe nodegroup create mycluster test-ng --node-count 1 --role test
