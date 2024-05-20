@@ -1,0 +1,61 @@
+# 1. Install package requirements
+apt update
+apt-get install python3-dev libffi-dev gcc libssl-dev python3-selinux python3-setuptools  -y
+sudo apt install python3-venv
+python3 -m venv os-venv
+source os-venv/bin/activate
+
+# 2. Install ansible & kolla-ansible 
+pip install -U pip
+pip install 'ansible-core>=2.14,<2.16'
+pip install git+https://opendev.org/openstack/kolla-ansible@stable/2023.2
+kolla-ansible install-deps
+
+# 3. Create kolla dir
+sudo mkdir -p /etc/kolla
+sudo chown $USER:$USER /etc/kolla"
+
+# 4. Copy inventory 
+cp -r os-venv/share/kolla-ansible/etc_examples/kolla/* /etc/kolla
+cp os-venv/share/kolla-ansible/ansible/inventory/* .
+
+# 5. Configure ansible 
+mkdir -p /etc/ansible
+sudo bash -c 'cat <<EOF> /etc/ansible/ansible.cfg
+[defaults]
+host_key_checking=False
+pipelining=True
+forks=100
+EOF'
+
+nano multinode
+kolla-genpwd
+nano /etc/kolla/globals.yml
+---
+"kolla_base_distro: "ubuntu"
+kolla_install_type: "source"
+openstack_release: "2023.2"
+kolla_internal_vip_address: "172.16.13.100"
+network_interface: "ens3"
+neutron_external_interface: "ens4"
+enable_openstack_core: "yes"
+enable_cinder: "yes"
+enable_cinder_backup: "no"
+enable_octavia: "yes"
+enable_magnum: "yes"
+enable_hacluster: "yes"
+enable_neutron_provider_networks: "yes"
+nova_compute_virt_type: "kvm"
+enable_cinder_backend_lvm: "yes"
+neutron_plugin_agent: "ovn"
+enable_redis: "yes"
+---
+
+# Create lvm
+sudo pvcreate /dev/vdb
+sudo vgcreate cinder-volumes /dev/vdb
+
+
+
+
+
