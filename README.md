@@ -6,7 +6,7 @@ References :
 
 1. [Create prebuild image for k8s cluster](#1-create-prebuild-image-for-k8s-cluster)
 2. [Create template magnum for k8s](#2-create-template-magnum-for-k8s)
-3. [Create k8s cluster](#3-create-cluster-with-autoscalling-turn-on-default-no)
+3. [Create k8s cluster](#3-create-k8s-cluster)
 4. [Create cluster with autoscalling turn on (default no)](#4-create-cluster-with-autoscalling-turn-on-default-no)
 5. [Get Kubeconfig](#5-get-kubeconfig)
 6. [Manual Scale Cluster](#6-manual-scale-cluster)
@@ -49,21 +49,35 @@ openstack coe cluster template create \
 
 # 3. Create k8s cluster
 When creating the cluster we can changed default options from template, like internal network, subnet , flavor etc. Full command `openstack coe cluster --help`. 
+* note :
+  - Flavor for master and worker can be changed with the options `--master-flavor` for master and `--flavor` for worker.
+  - The number of master nodes `--master-count` can only be an odd number.
+  - When enabling autoscalling it is also necessary to add the options `min_node_count` and `max_node_count`
+  - [How autoscalling work ?](https://github.com/pahrialms/magnum-capi/blob/main/autoscalling/autoscalling_flow.md)
+  - When using persistent storage need to specify label `boot_volume_type` and `boot_volume_size`
+
+a. Create cluster k8s with autoscaling enabled and ephemeral storage
 
 ```
-openstack coe cluster create mycluster --keypair sysadmin-key \
-  --cluster-template k8s-v1.26.11  --merge-labels --fixed-subnet internal-subnet --fixed-network internal-net \
-  --master-count 1 --node-count 1
+openstack coe cluster create mycluster \
+    --keypair sysadmin-key \
+    --cluster-template k8s-v1.27.8 \
+    --master-count 1 \
+    --node-count 1 \
+    --merge-labels \
+    --labels kube_tag=v1.27.8,auto_scaling_enabled=true,min_node_count=1,max_node_count=3,octavia_provider=ovn
 ```
 
-# 4. Create cluster with autoscalling turn on (default no)
-To turn on autoscaling magnum, we can add label `auto_scaling_enabled` with `true` value, and to limit the minimum and maximum worker node when the autoscaling is run, we can use these labels `min_node_count=x` and `max_node_count=x` default value 1 for minimal and 2 for maximal.
-[How autoscalling work ?](https://github.com/pahrialms/magnum-capi/blob/main/autoscalling/autoscalling_flow.md)
+b. Create cluster k8s with autoscaling enabled and persistent storage
+
 ```
-openstack coe cluster create mycluster --keypair sysadmin-key \
-  --cluster-template k8s-v1.26.11 \
-  --master-count 1 --node-count 1 --merge-labels \
-  --labels auto_scaling_enabled=true,min_node_count=1,max_node_count=3 
+openstack coe cluster create mycluster \
+    --keypair sysadmin-key \
+    --cluster-template k8s-v1.27.8 \
+    --master-count 1 \
+    --node-count 1 \
+    --merge-labels \
+    --labels kube_tag=v1.27.8,auto_scaling_enabled=true,min_node_count=1,max_node_count=3,octavia_provider=ovn,boot_volume_type=VT1,boot_volume_size=20
 ```
 
 # 5. Get Kubeconfig
