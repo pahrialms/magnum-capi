@@ -88,11 +88,12 @@ openstack coe cluster config <cluster-name>
 openstack coe cluster config mycluster
 ```
 
-# 6. Manual scale cluster
-Scaling a cluster means adding servers to or removing servers from the cluster. for example:
+# 6. Manual scale cluster with different spec node worker
+* note:
+    - Penambahan node worker ini dilakukan manual dengan menggunakan `nodegroup`, dengan ini kita bisa tambah worker dengan flavor yang berbeda
 
 ```
-openstack coe nodegroup create mycluster test-ng --node-count 1 --role test
+openstack coe nodegroup create mycluster high --node-count 1 --role test
 ```
 
 # 7. Delete cluster
